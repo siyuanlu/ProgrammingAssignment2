@@ -20,7 +20,29 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
+        inverseX <- x$getInverse();
+        if(!is.null(inverseX)){
+                message("getting cached data")
+                return(inverseX)
+        }
+        matrix <- x$get()
+        inverseX <-slove(matrix)
+        x$setInverse(inverseX)
+        inverseX
 }
+
+cachemean <- function(x, ...) {
+        m <- x$getmean()
+        if(!is.null(m)) {
+                message("getting cached data")
+                return(m)
+        }
+        data <- x$get()
+        m <- mean(data, ...)
+        x$setmean(m)
+        m
+}
+
 
 makeVector <- function(x = numeric()) {
         m <- NULL
